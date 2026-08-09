@@ -243,22 +243,22 @@ async def _async_main():
 
 
 def _build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="Prune stale MeshCore contacts")
+    p = argparse.ArgumentParser(description="Prune stale MeshCore contacts", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     p.add_argument("--max-age-days", type=float, default=None, help="Remove contacts older than N days")
     p.add_argument("--max-distance-km", type=float, default=None, help="Remove contacts farther than N km")
     p.add_argument("--keep-types", type=str, default=None, help="Contact types to KEEP (comma-sep: CLI,REP,ROOM,SENS)")
     p.add_argument("--keep-favourites", action="store_true", default=True, help="Never remove favourited contacts")
-    p.add_argument("--no-keep-favourites", action="store_false", dest="keep_favourites", help="Allow removing favourites")
+    p.add_argument("--no-keep-favourites", action="store_false", dest="keep_favourites", default=argparse.SUPPRESS, help="Allow removing favourites")
     p.add_argument("--whitelist", type=str, default=None, help="Contact names to always keep (comma-sep)")
-    p.add_argument("--dry-run", action="store_true", default=True, help="Show plan, don't delete (default)")
-    p.add_argument("--no-dry-run", action="store_false", dest="dry_run", help="Actually delete contacts")
-    p.add_argument("-y", "--yes", action="store_true", help="Skip confirmation prompt")
-    p.add_argument("--no-backup", action="store_true", help="Skip exporting before delete (faster)")
+    p.add_argument("--dry-run", action="store_true", default=True, help="Show plan, don't delete")
+    p.add_argument("--no-dry-run", action="store_false", dest="dry_run", default=argparse.SUPPRESS, help="Actually delete contacts")
+    p.add_argument("-y", "--yes", action="store_true", default=False, help="Skip confirmation prompt")
+    p.add_argument("--no-backup", action="store_true", default=False, help="Skip exporting before delete (faster)")
     p.add_argument("--backup", type=str, default=None, help="Backup file path (default: meshcore_pruned_<ts>.json)")
-    p.add_argument("-d", "--device", type=str, default=None, help="BLE device address or name")
+    p.add_argument("-d", "--device", type=str, default=None, help="BLE device address or name (auto-discovers if omitted)")
     p.add_argument("-s", "--serial", type=str, default=None, help="Serial port path")
     p.add_argument("-b", "--baudrate", type=int, default=115200, help="Serial baud rate")
-    p.add_argument("--debug", action="store_true", help="Debug logging")
+    p.add_argument("--debug", action="store_true", default=False, help="Enable debug logging")
     return p
 
 
