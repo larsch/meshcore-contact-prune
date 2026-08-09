@@ -1,0 +1,46 @@
+[project]
+name = "meshcore-contact-prune"
+version = "0.1.0"
+description = "Prune stale contacts from a MeshCore companion device"
+readme = "README.md"
+authors = [
+    { name = "Lars Christensen", email = "larsch@belunktum.dk" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "meshcore>=2.3.8",
+    "rich>=15.0.0",
+]
+
+[project.scripts]
+meshcore-contact-prune = "meshcore_contact_prune:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.2",
+]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 160
+fix = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["meshcore_contact_prune"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--tb=short --strict-markers"
