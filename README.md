@@ -4,9 +4,9 @@ Prune stale contacts from a [MeshCore](https://meshcore.io) **Bluetooth
 companion** device (the kind you pair with the MeshCore mobile app via BLE).
 Also works over USB Serial if your companion firmware was built for that.
 
-Filters contacts by configurable criteria — age, distance, type — and optionally
-exports each deleted contact as a `meshcore://` URI so they can be re-imported
-or shared as QR codes later.
+Filters contacts by configurable criteria — age, distance, type — and exports
+each deleted contact as a `meshcore://` URI so they can be re-imported
+or shared as QR codes later.  Export can be skipped with `--no-backup`.
 
 ## Prerequisites
 
