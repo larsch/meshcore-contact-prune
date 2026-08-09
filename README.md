@@ -64,10 +64,12 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ## Quick Start
 
 ```bash
-git clone <this-repo>
-cd meshcore-contact-prune
+# run directly from GitHub — no clone needed
+uvx --from git+https://github.com/larsch/meshcore-contact-prune meshcore-contact-prune --max-age-days 30
 
-# Dry-run (safe — shows what would be deleted)
+# or clone and run locally
+git clone https://github.com/larsch/meshcore-contact-prune
+cd meshcore-contact-prune
 uv run meshcore-contact-prune --max-age-days 30
 ```
 
