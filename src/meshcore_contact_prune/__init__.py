@@ -243,14 +243,12 @@ async def _async_main():
 
 
 class _HelpFormatter(argparse.ArgumentDefaultsHelpFormatter):
-    """Shows defaults in plain English instead of Python literals."""
+    """Shows defaults in plain English, hides them when unset."""
 
     def _get_help_string(self, action):
         help_text = action.help or ""
-        if action.default is not argparse.SUPPRESS:
-            if action.default is None:
-                default = "none"
-            elif action.default is True:
+        if action.default is not argparse.SUPPRESS and action.default is not None:
+            if action.default is True:
                 default = "on"
             elif action.default is False:
                 default = "off"
