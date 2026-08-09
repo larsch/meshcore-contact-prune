@@ -8,3 +8,4 @@ wheels/
 
 # Virtual environments
 .venv
+meshcore_pruned_*.json
