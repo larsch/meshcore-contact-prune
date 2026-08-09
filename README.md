@@ -142,6 +142,7 @@ uv run meshcore-contact-prune --serial /dev/ttyACM0 --max-age-days 30
 - If the device is already connected to another client (e.g. the mobile app
   or your OS Bluetooth settings), **disconnect it first** — MeshCore only
   accepts one BLE connection at a time.
+  Close the MeshCore app on your phone and try again.
 
 ### Contacts fetch fails / times out
 
