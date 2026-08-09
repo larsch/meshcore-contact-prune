@@ -189,7 +189,7 @@ async def _async_main():
             reasons: list[str] = []
             if args.max_age_days is not None and age_days > args.max_age_days:
                 reasons.append(f"age {age_days:.1f}d > {args.max_age_days}d")
-            if args.max_distance_km is not None and dist_km > args.max_distance_km:
+            if args.max_distance_km is not None and dist_km != float("inf") and dist_km > args.max_distance_km:
                 reasons.append(f"dist {dist_km:.0f}km > {args.max_distance_km}km")
 
             if reasons:
