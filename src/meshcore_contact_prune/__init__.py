@@ -242,8 +242,27 @@ async def _async_main():
 # ── internal helpers ───────────────────────────────────────────────────────
 
 
+class _HelpFormatter(argparse.ArgumentDefaultsHelpFormatter):
+    """Shows defaults in plain English instead of Python literals."""
+
+    def _get_help_string(self, action):
+        help_text = action.help or ""
+        if action.default is not argparse.SUPPRESS:
+            if action.default is None:
+                default = "none"
+            elif action.default is True:
+                default = "on"
+            elif action.default is False:
+                default = "off"
+            else:
+                default = str(action.default)
+            if "%(default)" not in help_text:
+                help_text += f" (default: {default})"
+        return help_text
+
+
 def _build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(description="Prune stale MeshCore contacts", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    p = argparse.ArgumentParser(description="Prune stale MeshCore contacts", formatter_class=_HelpFormatter)
     p.add_argument("--max-age-days", type=float, default=None, help="Remove contacts older than N days")
     p.add_argument("--max-distance-km", type=float, default=None, help="Remove contacts farther than N km")
     p.add_argument("--keep-types", type=str, default=None, help="Contact types to keep, e.g. 'CLI,REP' (types: CLI, REP, ROOM, SENS)")
